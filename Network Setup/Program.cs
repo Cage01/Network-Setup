@@ -18,26 +18,28 @@ namespace Network_Setup
 
                 foreach (ManagementObject m in queryCollection)
                 {
-                    string name = m["Name"].ToString();
-
-                    if (CleanupString(name).Contains("wifi"))
+                    try
                     {
+                        string name = m["Name"].ToString();
 
-                        if (Boolean.Parse(m["NetEnabled"].ToString()))
-                            m.InvokeMethod("Disable", null);
-                        else
-                            m.InvokeMethod("Enable", null);
-                    }
+                        if (CleanupString(name).Contains("wifi"))
+                        {
 
-                    else if (!IsVPN(name) && CleanupString(name).Contains("ethernet"))
-                    {
-                         if (Boolean.Parse(m["NetEnabled"].ToString()))
-                            m.InvokeMethod("Disable", null);
-                        else
-                            m.InvokeMethod("Enable", null);
+                            if (Boolean.Parse(m["NetEnabled"].ToString()))
+                                m.InvokeMethod("Disable", null);
+                            else
+                                m.InvokeMethod("Enable", null);
+                        }
 
-                    }
+                        else if (!IsVPN(name) && CleanupString(name).Contains("ethernet"))
+                        {
+                            if (Boolean.Parse(m["NetEnabled"].ToString()))
+                                m.InvokeMethod("Disable", null);
+                            else
+                                m.InvokeMethod("Enable", null);
 
+                        }
+                    } catch(NullReferenceException e) {  /* Do Nothing */ }
                 }
             }
 

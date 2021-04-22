@@ -2,4 +2,8 @@
 packages/
 Network Setup/bin/
 Network Setup/obj/
+Setup/Debug/
+Setup/Release/
 
+Setup/Release/Setup.msi
+Setup/Release/Setup.msi
